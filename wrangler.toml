@@ -1,0 +1,44 @@
+name = "cloudflare-employee-r2"
+compatibility_date = "2025-11-09"
+compatibility_flags = ["nodejs_compat"]
+
+# Provide your account id
+account_id = "dcd630cba79d5be21e1851bcd326251e"
+
+workers_dev = false
+
+routes = [
+	{ pattern = "employeee.jjtechtm.xyz", custom_domain = true }	
+]
+
+# Worker entry
+main = "worker/index.ts"
+
+# Bindings
+[[d1_databases]]
+binding = "employee_db"
+database_name = "employee_db"
+database_id = "c57daa34-c22a-4491-9336-fab86fb54689"
+
+# R2 binding (bucket)
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "my-employee-data"
+
+[observability]
+enabled = true
+
+# Environment variables and secrets you'll set with `wrangler secret put`
+[vars]
+R2_ACCOUNT_ID = "dcd630cba79d5be21e1851bcd326251e" # useful for presign URL endpoint construction if needed
+R2_ENDPOINT = "https://dcd630cba79d5be21e1851bcd326251e.r2.cloudflarestorage.com"
+
+# Note: For signing presigned urls you should create and store these as secrets:
+# wrangler secret put R2_ACCESS_KEY
+# wrangler secret put R2_SECRET_KEY
+
+[site]
+bucket = "./dist" 
+
+[build]
+command = "npm run build"

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* small apple-style tweaks */
+:root {
+  --apple-gray: #f5f6f7;
+}
+body { background: var(--apple-gray); }
