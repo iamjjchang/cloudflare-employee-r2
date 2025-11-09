@@ -10,9 +10,10 @@ dist/
 build/
 
 # production
-dist
+/dist
 /.wrangler
 /node_modules
+
 
 # Environment variables
 .env
